@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TouristRoutes.UI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:TouristRoutes.UI.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="TouristRoutes.UI">
+
+    <ShellContent
+        Title="Туристические маршруты"
+        ContentTemplate="{DataTemplate pages:TouristRoutesPage}"
+        Route="TouristRoutesPage" />
+
+</Shell>

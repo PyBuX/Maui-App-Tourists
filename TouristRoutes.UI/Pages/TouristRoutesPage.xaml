@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TouristRoutes.UI.Pages.TouristRoutesPage"
+             xmlns:models="clr-namespace:TouristRoutes.UI.ViewModels"
+             xmlns:entities="clr-namespace:TouristRoutes.Domain.Entities;assembly=TouristRoutes.Domain"
+             x:DataType="models:TouristRoutesViewModels"
+             xmlns:cv="clr-namespace:TouristRoutes.UI.ValueConverters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Туристические маршруты">
+
+    <ContentPage.Resources>
+        <cv:RateToColorValueConverter x:Key="RateToColorValueConverter"/>
+        <cv:VisibilyConverter x:Key="VisibilityConverter"/>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <StackLayout>
+
+
+            <StackLayout Orientation="Horizontal">
+                <Button Margin="3" Text="Добавить маршрут" Command="{Binding ShowCreateTouristRoutCommand}" />
+                <Button Margin="3" Text="Редактировать маршрут" Command="{Binding UpdateCommand}" />
+                <Button Margin="3" Text="Добавить достопримечательность" Command="{Binding ShowCreateAttractivineCommand}"/>
+            </StackLayout>
+
+
+            <Picker Margin="5" Title="Выберите маршрут: "
+                ItemsSource="{Binding TouristRoutes}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedTouristRout}">
+
+                <Picker.Behaviors>
+                    <toolkit:EventToCommandBehavior
+        EventName="SelectedIndexChanged"
+        Command="{Binding UpdateMembersListCommand}" />
+                </Picker.Behaviors>
+            </Picker>
+
+            <Border Stroke="Black" StrokeThickness="1">
+                <Grid Margin="5" Padding="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Text="Название маршрута"/>
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1" Text="Дата маршрута"/>
+
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" Text="{Binding SelectedTouristRout.Name}"/>
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedTouristRout.Date}"/>
+                </Grid>
+            </Border>
+
+            <CollectionView IsVisible="{Binding SelectedTouristRout, Converter={StaticResource VisibilityConverter}}" ItemsSource="{Binding Attractiveness, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="entities:Attractivene">
+
+                        <Border StrokeThickness="0"
+                                Padding="5">
+
+                            <Border Stroke="{Binding TicketPrice, Converter={StaticResource RateToColorValueConverter}}"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 25,25,25,25">
+
+                                <HorizontalStackLayout>
+
+                                    <Border StrokeThickness="0"
+                                            Padding="5">
+                                        <Label Margin="5" Text="{Binding Name}"/>
+                                    </Border>
+                                    <HorizontalStackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding
+                                                              Source={RelativeSource
+                                                              AncestorType={x:Type models:TouristRoutesViewModels} },
+                                                              Path=ShowDetailsCommand}"
+                                   CommandParameter="{Binding}"/>
+                                    </HorizontalStackLayout.GestureRecognizers>
+                                </HorizontalStackLayout>
+                            </Border>
+                        </Border>
+                       
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+    </ScrollView>
+
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                    Command="{Binding UpdateGroupListCommand}"/>
+    </ContentPage.Behaviors>
+</ContentPage>

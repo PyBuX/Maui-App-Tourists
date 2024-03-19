@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TouristRoutes.UI.Pages.UpdateAttractivenePage"
+             xmlns:models="clr-namespace:TouristRoutes.UI.ViewModels"
+             x:DataType="models:UpdateAttractiveneVewModel"
+             Title="Редактирование информации">
+
+    <VerticalStackLayout Margin="25">
+        <Label Text=""/>
+        <Label Text="Введите название:"/>
+        <Entry Placeholder="Введите название" Text="{Binding Attractivene.Name}" />
+
+        <Label Text="Введите адрес:"/>
+        <Entry Placeholder="Введите адрес" Text="{Binding Attractivene.Location}" />
+
+        <Label Text="Введите описание:"/>
+        <Entry Placeholder="Введите описание" Text="{Binding Attractivene.Description}" />
+
+        <Label Text="Введите стоимость:"/>
+        <Entry Placeholder="Введите стоимость" Text="{Binding Attractivene.TicketPrice}" />
+
+        <Button Text="Сохранить" Margin="5" Command="{Binding UpdateCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>
