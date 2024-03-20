@@ -41,7 +41,7 @@
   5.	Предусмотреть возможность добавления и редактирования групп 
   6.	Предусмотреть сохранение файла изображения объекта. Имя файла должно соответствовать идентификатору объекта. 
   7.	Всю информацию об объектах и группах объектов хранить в базе данных. Для работы с базой данных использовать EntityFramework Core. 
-Требования к архитектуре проекта
+**Требования к архитектуре проекта**
 
 1)	Реализовать в проекте архитектуру Clean (чистую) и шаблон проектирования UnitOfWork. (с шаблоном UnitOfWork можно познакомиться, например, здесь: https://metanit.com/sharp/mvc5/23.3.php или здесь: 
 https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started- with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an- asp-net-mvc-application ) 
